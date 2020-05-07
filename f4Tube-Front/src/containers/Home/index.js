@@ -4,9 +4,9 @@ import { routes } from "../Router"
 import logo from "../../resources/logo.png";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import Button from "@material-ui/core/Button"
 import { getFeed } from "../../actions/feed";
 import Loading from "../../components/Loading"
+import Header from "../../components/header/header"
 
 
 const MainDiv = styled.div`
@@ -72,6 +72,11 @@ export class Home extends Component {
         this.setState({ search: event.target.value })
     };
 
+    handleLogout = () => {
+        localStorage.removeItem("accessToken")
+        this.props.goToHome()
+    }
+
 
     render() {
 
@@ -95,22 +100,24 @@ export class Home extends Component {
                 )}
             </VideoDetails>
         )
-
+        const isLogged = window.localStorage.getItem("accessToken")
+        let buttonRender
+        if (isLogged) {
+            buttonRender = (<Header onClick={this.props.goToHome}
+                button1={"Profile"} onClick1={this.props.goToProfile}
+                button2={"Logout"} onClick2={this.handleLogout}
+                value={feed} onChange={this.handleFieldChange}
+            />)
+        } else {
+            buttonRender = (<Header onClick={this.props.goToHome}
+                button1={"Login"} onClick1={this.props.goToLogin}
+                button2={"SignUP"} onClick2={this.props.goToSignUp}
+                value={feed} onChange={this.handleFieldChange}
+            />)
+        }
         return (
             <MainDiv>
-                <HeaderHome>
-                    <LogoHome src={logo} />
-                    <div>
-                        <PesquisaHome value={feed} onChange={this.handleFieldChange} />
-                    </div>
-                    <NavHome>
-                        <li>
-                            <Button onClick={this.props.goToLogin} >Login</Button>
-                            <Button onClick={this.props.goToSignUp} >SingUp</Button>
-                        </li>
-                    </NavHome>
-                </HeaderHome>
-
+                {buttonRender}
                 <div>
                     {videosIsReady}
                 </div>
@@ -129,9 +136,12 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
+    goToHome: () => dispatch(push(routes.Home)),
     goToLogin: () => dispatch(push(routes.LoginPage)),
     goToSignUp: () => dispatch(push(routes.SignUp)),
+    goToProfile: () => dispatch(push(routes.UserProfile)),
     getFeed: () => dispatch(getFeed())
+
 
 })
 

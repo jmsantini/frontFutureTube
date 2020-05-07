@@ -6,6 +6,7 @@ import LoginPage from "../LoginPage/index"
 import PostVideo from "../PostVideo";
 import SignUp from "../SignUp";
 import UserProfile  from "../UserProfile";
+import ChangePW  from "../ChangePw";
 
 
 
@@ -16,6 +17,7 @@ export const routes = {
   PostVideo: "/postVideo",
   SignUp: "/signUp",
   UserProfile: "/Profile",
+  ChangePW: "/changePassword"
   // Outras rotas aqui
 };
 
@@ -29,6 +31,7 @@ function Router(props) {
         <Route exact path={routes.SignUp} component={SignUp} />
         <Route exact path={routes.UserProfile} component={UserProfile} />
         <Route exact path={routes.PostVideo} component={PostVideo} />
+        <Route exact path={routes.ChangePW} component={ChangePW} />
       </Switch>
     </ConnectedRouter>
   );
