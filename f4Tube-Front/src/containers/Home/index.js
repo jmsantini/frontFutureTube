@@ -10,6 +10,8 @@ import Loading from "../../components/Loading"
 
 
 const MainDiv = styled.div`
+    width:100%;
+    height: 100vh;
     list-style: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -19,6 +21,8 @@ const MainDiv = styled.div`
 const HeaderHome = styled.div`
     display:flex;
     flex-wrap: wrap;
+    width: 100%;
+    height: 150px;
     justify-content: space-between;
     padding:20px;
     background-color: #c5b6ff;
@@ -28,7 +32,6 @@ const HeaderHome = styled.div`
 const NavHome = styled.nav`
     display:flex;
 `
-
 const PesquisaHome = styled.input`
     width: 250px;
     height: 30px;
@@ -38,44 +41,50 @@ const LogoHome = styled.img`
     width:170px;
 `;
 
-
-
 const VideoDetails = styled.div`
     display: flex;
     flex-wrap: wrap;
 `
-
-
-const ListCategory = styled.li`
-    display: flex;
-    background-color: #A14AE8;
-    justify-content: space-between;
-    padding: 5px;
-    border: solid 2px black;
-`;
-
-
 const FooterHome = styled.div`
     background-color: #c5b6ff;
-    height: 40px;
+    height: 80px;
     width:100%;
-    position:fixed;
-    bottom: 0px;
     text-align:center;
 `;
 
 export class Home extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            search: ""
+        }
+    }
 
     componentDidMount() {
         this.props.getFeed()
     }
 
+    handleFieldChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+        this.setState({ search: event.target.value })
+    };
+
 
     render() {
 
-        const videosIsReady = this.props.feed.length === 0 ? <Loading/> : (
+        const { search, feed } = this.state
+
+        let filterVideos = this.props.feed.filter((video) => {
+            return video.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+                video.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+        });
+
+        const videosIsReady = this.props.feed.length === 0 ? <Loading /> : (
             <VideoDetails>
-                {this.props.feed.map((video) =>
+                {filterVideos.map((video) =>
                     <ul>
                         <iframe allowFullScreen
                             src={`https://www.youtube.com/embed/${video.link}`}>
@@ -92,7 +101,7 @@ export class Home extends Component {
                 <HeaderHome>
                     <LogoHome src={logo} />
                     <div>
-                        <PesquisaHome /> <Button>Buscar</Button>
+                        <PesquisaHome value={feed} onChange={this.handleFieldChange} />
                     </div>
                     <NavHome>
                         <li>
@@ -101,16 +110,10 @@ export class Home extends Component {
                         </li>
                     </NavHome>
                 </HeaderHome>
-                <div>
-                    <ListCategory>
-                        <Button>Filmes</Button>
-                        <Button>Musica</Button>
-                        <Button>Infantil</Button>
-                        <Button>Documentario</Button>
-                    </ListCategory>
-                </div>
 
-                {videosIsReady}
+                <div>
+                    {videosIsReady}
+                </div>
 
                 <FooterHome>
                     <LogoHome src={logo} />

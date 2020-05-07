@@ -31,14 +31,6 @@ const PesquisaHome = styled.input`
     height: 30px;
 `;
 
-// const ButtonHeader = styled.button`
-//     color: black;
-//     padding: 10px 32px;
-//     font-size: 18px;
-//     margin: 4px 2px;
-//     cursor: pointer;
-// `;
-
 const LogoHome = styled.img`
     width:170px;
 `;
