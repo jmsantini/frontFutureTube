@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 import styled from "styled-components";
 import { routes } from "../Router"
 import logo from "../../resources/logo.png";
@@ -18,24 +18,7 @@ const MainDiv = styled.div`
     min-width: 610px;
 `;
 
-const HeaderHome = styled.div`
-    display:flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 150px;
-    justify-content: space-between;
-    padding:20px;
-    background-color: #c5b6ff;
-    align-items: center;
-`
 
-const NavHome = styled.nav`
-    display:flex;
-`
-const PesquisaHome = styled.input`
-    width: 250px;
-    height: 30px;
-`;
 
 const LogoHome = styled.img`
     width:170px;

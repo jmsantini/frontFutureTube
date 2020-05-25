@@ -4,12 +4,7 @@ import { routes } from "../containers/Router"
 
 const baseURL = "https://rjcm2ecohe.execute-api.us-east-1.amazonaws.com/Letube"
 
-const loginUser = (login) => ({
-    type: "LOGIN_USER",
-    payload: {
-        login,
-    }
-})
+
 
 export const postLoginUser = (email, password) => async (dispatch) => {
     const newPotato = {

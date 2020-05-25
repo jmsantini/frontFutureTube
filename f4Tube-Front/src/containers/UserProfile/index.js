@@ -9,6 +9,7 @@ import Loading from "../../components/Loading"
 import { getFeed } from "../../actions/feed";
 import { getUserProfile } from "../../actions/user";
 import Header from "../../components/header/header"
+import { deleteVideo } from "../../actions/videos";
 
 
 const MainDiv = styled.div`
@@ -17,23 +18,7 @@ const MainDiv = styled.div`
     font-weight: bold;
 `;
 
-const HeaderHome = styled.div`
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding:20px;
-    background-color: #c5b6ff;
-    align-items: center;
-`
 
-const NavHome = styled.nav`
-    display:flex;
-`
-
-const PesquisaHome = styled.input`
-    width: 250px;
-    height: 30px;
-`;
 
 const LogoHome = styled.img`
     width:170px;
@@ -98,6 +83,10 @@ export class UserProfile extends Component {
         this.props.goToHome()
     }
 
+    handleDeleteVideo = (videoId, title) => {
+        this.props.deleteVideo(videoId, title)
+    }
+
 
 
 
@@ -123,6 +112,7 @@ export class UserProfile extends Component {
                             src={`https://www.youtube.com/embed/${video.link}`}>
                         </iframe>
                         <h3>{video.title}</h3>
+                        <button onClick={() => this.handleDeleteVideo(video.id, video.title)} >X</button>
                     </ul>
 
                 )}
@@ -136,11 +126,11 @@ export class UserProfile extends Component {
                 button2={"Logout"} onClick2={this.handleLogout}
                 value={feed} onChange={this.handleFieldChange}
             />)
-        } 
+        }
 
         return (
             <MainDiv>
-               {buttonRender}
+                {buttonRender}
                 <div>
                     <ListCategory>
                         <Button onClick={this.props.goToPostVideo} >Post Video</Button>
@@ -160,7 +150,8 @@ export class UserProfile extends Component {
 
 const mapStateToProps = state => ({
     feed: state.videos.allVideos,
-    profile: state.user.profile
+    profile: state.user.profile,
+    videoId: state.videos.selectedVideoId
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -168,7 +159,8 @@ const mapDispatchToProps = (dispatch) => ({
     goToPostVideo: () => dispatch(push(routes.PostVideo)),
     goToChangePW: () => dispatch(push(routes.ChangePW)),
     getFeed: () => dispatch(getFeed()),
-    getUserProfile: () => dispatch(getUserProfile())
+    getUserProfile: () => dispatch(getUserProfile()),
+    deleteVideo: (videoId, title) => dispatch(deleteVideo(videoId, title))
 })
 
 

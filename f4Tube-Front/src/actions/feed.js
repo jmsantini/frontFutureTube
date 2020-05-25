@@ -1,6 +1,4 @@
 import axios from "axios";
-import { push } from "connected-react-router";
-import { routes } from "../containers/Router"
 
 const baseURL = "https://rjcm2ecohe.execute-api.us-east-1.amazonaws.com/Letube"
 

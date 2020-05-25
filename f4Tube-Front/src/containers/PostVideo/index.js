@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button"
 import styled from "styled-components";
-import { routes } from "../Router/index";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
 import logo from "../../resources/logo.png";
 import { createVideo } from "../../actions/videos";
 
