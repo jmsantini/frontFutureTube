@@ -4,20 +4,20 @@ O Front-end web desse projeto teve seus arquivos divididos duas seções. Foram 
 
 
 Linguagens e serviços utilizadas
-ReactJs, Redux, javascript, Material-ui, HTML, CSS, Aws s3 para o hosting do site e gerenciadores de pacotes do Nodejs: yarn e npm.
+ReactJs, Redux, javascript, Material-ui, HTML, CSS, Aws s3 para o hosting do site e gerenciadores de pacotes do Nodejs: npm.
 
 
 Sobre
-Esse foi o último projeto Front-end que fiz. Esse projeto foi baseado no youtube com funcionalidades parecidas. Nele o usuário consegue criar vídeos, consegue criar um conta, deletar vídeos, assistir vídeos, consegue ver os seus próprios dados, modificar dados do próprio usuário logado e também os detalhes dos vídeos postados.
+Esse foi o último projeto Front-end que fiz. Esse projeto foi baseado no youtube com funcionalidades parecidas. Nele o usuário consegue criar vídeos, consegue criar um conta, deletar vídeos, assistir vídeos.
 
 Instruções para rodar
 Por ser um projeto com ReactJS, há a necessidade do NodeJS. Com ele em sua máquina, basta abrir o terminal e navegar até o repositório clonado e rodar:
 
-npm install ou yarn para instalar todas as dependências;
+npm install para instalar todas as dependências;
 
-npm run start ou yarn start para rodar localmente o projeto
+npm run start para rodar localmente o projeto
 
-npm run build ou yarn build para gerar uma versão estática do projeto (que ficará na pasta build)
+npm run build para gerar uma versão estática do projeto (que ficará na pasta build)
 
 Contato
 
